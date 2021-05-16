@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UsersAPI;
 
 use UsersAPI\UserModel;
