@@ -35,14 +35,16 @@ class UserRepository
     {
         $users = [];
 
-        $handle = fopen($this->fileUri, 'r');
+        if ($handle = fopen($this->fileUri, 'r')) {
+            while (($line = fgetcsv($handle, 1000)) !== false) {
+                $users[] = new UserModel($line[0], $line[1], $line[2], $line[3]);
+            }
 
-        while (($line = fgetcsv($handle, 1000)) !== false) {
-            $users[] = new UserModel($line[0], $line[1], $line[2], $line[3]);
+            fclose($handle);
+
+            return $users;
         }
 
-        fclose($handle);
-
-        return $users;
+        return false;
     }
 }
