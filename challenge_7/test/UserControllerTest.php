@@ -66,4 +66,20 @@ class UserControllerTest extends TestCase
             ]
         ]), $userController->deleteUser('esron.dtamar@gmail.com'));
     }
+
+    public function testItReturnsErrorWhenTheEmailIsNotFound()
+    {
+        $email = 'esron.dtamar@gmail.com';
+        $userRepositoryMock = $this->createMock(UserRepository::class);
+        $userRepositoryMock->method('deleteUser')
+            ->willReturn(false);
+
+        $userController = new UserController($userRepositoryMock);
+
+        $this->assertEquals(json_encode([
+            'errors' => [
+                'email' => "User with email $email not found",
+            ]
+        ]), $userController->deleteUser($email));
+    }
 }
