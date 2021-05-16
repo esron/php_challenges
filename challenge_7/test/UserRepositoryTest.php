@@ -13,6 +13,8 @@ class UserRepositoryTest extends TestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $this->fileSystem = vfsStream::setup('stub');
     }
 
