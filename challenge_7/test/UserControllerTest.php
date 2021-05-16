@@ -51,4 +51,19 @@ class UserControllerTest extends TestCase
             ]
         ]), $userController->getUsers());
     }
+
+    public function testItCanDeleteUsersByEmail()
+    {
+        $userRepositoryMock = $this->createMock(UserRepository::class);
+        $userRepositoryMock->method('deleteUser')
+            ->willReturn(true);
+
+        $userController = new UserController($userRepositoryMock);
+
+        $this->assertEquals(json_encode([
+            'data' => [
+                'message' => 'User deleted',
+            ]
+        ]), $userController->deleteUser('esron.dtamar@gmail.com'));
+    }
 }
