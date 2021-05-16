@@ -13,6 +13,22 @@ class UserRepository
         $this->fileUri = $fileUri;
     }
 
+    public function saveUser(UserModel $user): UserModel
+    {
+        if ($handle = fopen($this->fileUri, 'a')) {
+            fputcsv($handle, [
+                $user->firstName,
+                $user->lastName,
+                $user->email,
+                $user->phone,
+            ]);
+
+            return $user;
+        }
+
+        return false;
+    }
+
     public function getUsers(): array
     {
         $users = [];

@@ -61,6 +61,7 @@ class UserRepositoryTest extends TestCase
         $expectedContent = <<<EOD
 Alan,Turing,alan.turing@cam.ac.uk,07911123456
 Ada,Lovelace,ada.lovelace@london.ac.uk,07966654321
+
 EOD;
 
         $this->assertEquals($expectedContent, file_get_contents($fileName));
