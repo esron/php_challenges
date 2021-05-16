@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Test;
 
@@ -79,6 +81,35 @@ EOD;
         $userRepository->deleteUser('esron.dtamar@gmail.com');
 
         $this->assertEquals([
+            new UserModel(
+                'Silva',
+                'Esron',
+                'silva.esron@gmail.com',
+                '87900000000'
+            ),
+        ], $userRepository->getUsers());
+    }
+
+    public function testItCanUpdateOneUserByEmail()
+    {
+        // Creates temporary file
+        vfsStream::newFile('users.txt')
+            ->at($this->fileSystem)
+            ->setContent(file_get_contents('test/stub/users.txt'));
+
+        $userRepository = new UserRepository($this->fileSystem->url() . '/users.txt');
+
+        $edson = new UserModel(
+            'Thomas',
+            'Edson',
+            'thomas@edson.com',
+            '7488888888'
+        );
+
+        $userRepository->updateUser('esron.dtamar@gmail.com', $edson);
+
+        $this->assertEquals([
+            $edson,
             new UserModel(
                 'Silva',
                 'Esron',
