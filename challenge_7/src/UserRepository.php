@@ -70,8 +70,6 @@ class UserRepository
 
     public function deleteUser(string $email): bool
     {
-        $users = [];
-
         if ($users = $this->getUsers()) {
             $newUsers = array_filter($users, fn ($user) => $user->email !== $email);
 
