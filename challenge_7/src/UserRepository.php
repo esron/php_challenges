@@ -23,6 +23,8 @@ class UserRepository
                 $user->phone,
             ]);
 
+            fclose($handle);
+
             return $user;
         }
 
