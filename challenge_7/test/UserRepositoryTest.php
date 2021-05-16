@@ -66,4 +66,25 @@ EOD;
 
         $this->assertEquals($expectedContent, file_get_contents($fileName));
     }
+
+    public function testItCanDeleteOneUserByEmail()
+    {
+        // Creates temporary file
+        vfsStream::newFile('users.txt')
+            ->at($this->fileSystem)
+            ->setContent(file_get_contents('test/stub/users.txt'));
+
+        $userRepository = new UserRepository($this->fileSystem->url() . '/users.txt');
+
+        $userRepository->deleteUser('esron.dtamar@gmail.com');
+
+        $this->assertEquals([
+            new UserModel(
+                'Silva',
+                'Esron',
+                'silva.esron@gmail.com',
+                '87900000000'
+            ),
+        ], $userRepository->getUsers());
+    }
 }
