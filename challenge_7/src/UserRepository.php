@@ -31,6 +31,26 @@ class UserRepository
         return false;
     }
 
+    private function updateUsersFile(array $users): bool
+    {
+        if ($handle = fopen($this->fileUri, 'w')) {
+            foreach ($users as $user) {
+                fputcsv($handle, [
+                    $user->firstName,
+                    $user->lastName,
+                    $user->email,
+                    $user->phone,
+                ]);
+            }
+
+            fclose($handle);
+
+            return true;
+        }
+
+        return false;
+    }
+
     public function getUsers(): array
     {
         $users = [];
@@ -43,6 +63,19 @@ class UserRepository
             fclose($handle);
 
             return $users;
+        }
+
+        return false;
+    }
+
+    public function deleteUser(string $email): bool
+    {
+        $users = [];
+
+        if ($users = $this->getUsers()) {
+            $newUsers = array_filter($users, fn ($user) => $user->email !== $email);
+
+            return $this->updateUsersFile($newUsers);
         }
 
         return false;
