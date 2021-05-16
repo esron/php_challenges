@@ -16,41 +16,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $formError['email'] = 'Email é obrigatório';
     } elseif ($email === false) {
         $formError['email'] = 'Email inválido';
-    } else {
-        $handle = fopen('registros.txt', 'r');
-
-        while (($line = fgetcsv($handle, 1000)) !== false) {
-            $fileEmail = $line[$emailIndex];
-
-            if ($email === $fileEmail) {
-                $formError['email'] = 'Este email já esta em uso, tente outro';
-                break;
-            }
-        }
-
-        fclose($handle);
     }
 
     // Phone validation
     $phoneLen = strlen($formPhone);
-    $phone = true;
     if ($formPhone !== ''
         && (!is_numeric($formPhone)
             || $phoneLen > 11
             || $phoneLen < 10)) {
         $formError['phone'] = 'Telefone inválido';
-        $phone = false;
     }
 
     if (isset($formError['email']) === false
+        && isset($formError['phone']) === false) {
+        $handle = fopen('registros.txt', 'r');
+
+        while (($line = fgetcsv($handle, 1000)) !== false) {
+            $fileEmail = $line[$emailIndex];
+            $filePhone = $line[$phoneIndex];
+
+            if ($email === $fileEmail) {
+                $formError['email'] = 'Este email já esta em uso, tente outro';
+                break;
+            }
+
+            if ($formPhone === $filePhone) {
+                $formError['phone'] = 'Este telefone já esta em uso, tente outro';
+                break;
+            }
+        }
+    }
+
+    fclose($handle);
+
+    if (isset($formError['email']) === false
         && isset($formError['phone']) === false
-        && ($handle = fopen('registros.txt', 'a+'))
-    ) {
+        && ($handle = fopen('registros.txt', 'a+'))) {
         fputcsv($handle, [
             $firstName,
             $lastName,
             $email,
-            $phone,
+            $formPhone,
             $login,
             password_hash($password, PASSWORD_BCRYPT),
         ]);
