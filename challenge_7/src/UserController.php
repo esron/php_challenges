@@ -19,4 +19,15 @@ class UserController
     {
         return json_encode(['data' => $this->userRepository->getUsers()]);
     }
+
+    public function deleteUser(string $email)
+    {
+        if ($this->userRepository->deleteUser($email)) {
+            return json_encode(['data' => ['message' => 'User deleted']]);
+        }
+
+        http_response_code(422);
+
+        return json_encode(['errors' => ['email' => "User with email $email not found"]]);
+    }
 }
