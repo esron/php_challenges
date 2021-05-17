@@ -1,0 +1,163 @@
+_type: export
+__export_format: 4
+__export_date: 2021-05-17T02:18:33.081Z
+__export_source: insomnia.desktop.app:v2021.3.0
+resources:
+  - _id: req_803999b4455348d58c29a0f25dbb51e1
+    parentId: wrk_bcfb92537efe49349ed3f54491385f36
+    modified: 1621215010353
+    created: 1621202703745
+    url: localhost:8080/users
+    name: Get Users
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: Acccept
+        value: aplication/json
+        description: ""
+        id: pair_eb100a79edd3445095692439dfb0a5b2
+    authentication: {}
+    metaSortKey: -1621202703746
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_bcfb92537efe49349ed3f54491385f36
+    parentId: null
+    modified: 1621202693614
+    created: 1621202693614
+    name: Pure PHP REST API
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_441fb73b113e414daf2ed826e07d221c
+    parentId: wrk_bcfb92537efe49349ed3f54491385f36
+    modified: 1621212942752
+    created: 1621212565689
+    url: localhost:8080/users
+    name: Create User
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"firstName": "Esron",
+        	"lastName": "Silva",
+        	"email": "esron.dtamar@gmail.com",
+        	"phone": "74991166571"
+        }
+    parameters: []
+    headers:
+      - name: Acccept
+        value: application/json
+        description: ""
+        id: pair_eb100a79edd3445095692439dfb0a5b2
+      - name: Content-Type
+        value: application/json
+        description: ""
+        id: pair_1a9c0ba89fbd41c9ba38a4bcc21648bb
+    authentication: {}
+    metaSortKey: -1620962563447.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_c8abe27ed06a40418ed25c63c5836e87
+    parentId: wrk_bcfb92537efe49349ed3f54491385f36
+    modified: 1621215057752
+    created: 1621215000957
+    url: localhost:8080/users?email=esron.dtamar@gmail.com
+    name: Update User
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"firstName": "Esron",
+        	"lastName": "Silva",
+        	"email": "esron.dtamar@gmail.com",
+        	"phone": "74900000000"
+        }
+    parameters: []
+    headers:
+      - name: Acccept
+        value: application/json
+        description: ""
+        id: pair_eb100a79edd3445095692439dfb0a5b2
+      - name: Content-Type
+        value: application/json
+        description: ""
+        id: pair_1a9c0ba89fbd41c9ba38a4bcc21648bb
+    authentication: {}
+    metaSortKey: -1620842493298.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8ca9bf994e494e6e860a5679f2ca4547
+    parentId: wrk_bcfb92537efe49349ed3f54491385f36
+    modified: 1621206766347
+    created: 1621205070511
+    url: localhost:8080/users?email=esron.dtamar@gmail.com
+    name: GetUsers by Email
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers:
+      - name: Acccept
+        value: aplication/json
+        description: ""
+        id: pair_eb100a79edd3445095692439dfb0a5b2
+    authentication: {}
+    metaSortKey: -1620722423149
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_cccfab4268ed694622d58945999628b5311996c4
+    parentId: wrk_bcfb92537efe49349ed3f54491385f36
+    modified: 1621202693883
+    created: 1621202693883
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1621202693883
+    _type: environment
+  - _id: jar_cccfab4268ed694622d58945999628b5311996c4
+    parentId: wrk_bcfb92537efe49349ed3f54491385f36
+    modified: 1621202693888
+    created: 1621202693888
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_562297b571b244db942857255aaeb9bb
+    parentId: wrk_bcfb92537efe49349ed3f54491385f36
+    modified: 1621202693617
+    created: 1621202693617
+    fileName: Pure PHP REST API
+    contents: ""
+    contentType: yaml
+    _type: api_spec
