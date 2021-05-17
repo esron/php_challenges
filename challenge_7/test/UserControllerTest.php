@@ -84,4 +84,26 @@ class UserControllerTest extends TestCase
             ]
         ]), $this->userController->deleteUser($email));
     }
+
+    public function testItCanCreateAnUser()
+    {
+        $user =  [
+            'firstName' => 'Nicola',
+            'lastName' => 'Tesla',
+            'email' => 'nicola.tesla@edson.com',
+            'phone' => '01912345678',
+        ];
+
+        $this->userRepositoryMock->method('saveUser')
+            ->willReturn(new UserModel(
+                $user['firstName'],
+                $user['lastName'],
+                $user['email'],
+                $user['phone']
+            ));
+
+        $this->assertEquals(json_encode([
+            'data' => $user,
+        ]), $this->userController->createUser());
+    }
 }
