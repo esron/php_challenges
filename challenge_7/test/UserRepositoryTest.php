@@ -118,4 +118,20 @@ EOD;
             ),
         ], $userRepository->getUsers());
     }
+
+    public function testItReturnsFalseWhenTringToDeleteAnAlreadDeletedUser()
+    {
+        // Creates temporary file
+        vfsStream::newFile('users.txt')
+                ->at($this->fileSystem)
+                ->setContent(file_get_contents('test/stub/users.txt'));
+
+        $userRepository = new UserRepository($this->fileSystem->url() . '/users.txt');
+
+        // Delete user
+        $userRepository->deleteUser('esron.dtamar@gmail.com');
+
+        // Try to delete again
+        $this->assertEquals(false, $userRepository->deleteUser('esron.dtamar@gmail.com'));
+    }
 }
