@@ -27,6 +27,11 @@ if ($_SERVER['PATH_INFO'] === '/users') {
             $post = json_decode(file_get_contents('php://input'), true);
             echo $userController->createUser($post);
             break;
+        case 'PUT':
+            $post = json_decode(file_get_contents('php://input'), true);
+            var_dump($post);
+            echo$userController->updateUser($_REQUEST['email'], $post);
+            break;
         default:
             return http_response_code(404);
     }
