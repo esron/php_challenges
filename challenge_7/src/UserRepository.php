@@ -85,14 +85,14 @@ class UserRepository
         return false;
     }
 
-    public function updateUser(string $email, UserModel $newUser): bool
+    public function updateUser(string $email, UserModel $newUser): UserModel
     {
         if ($users = $this->getUsers()) {
             $newUsers = array_map(fn ($user) => (
                 $user->email === $email ? $newUser : $user
             ), $users);
 
-            return $this->updateUsersFile($newUsers);
+            return $this->updateUsersFile($newUsers) ? $newUser : false;
         }
 
         return false;
