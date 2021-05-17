@@ -75,6 +75,10 @@ class UserRepository
         if ($users = $this->getUsers()) {
             $newUsers = array_filter($users, fn ($user) => $user->email !== $email);
 
+            if (count($newUsers) === count($users)) {
+                return false;
+            }
+
             return $this->updateUsersFile($newUsers);
         }
 
