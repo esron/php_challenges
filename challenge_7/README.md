@@ -2,7 +2,19 @@
 
 A simple REST API builded using only php and [phpunit](https://phpunit.de/) for testing.
 
-## routes
+## Running the project
+
+Enter the `web` folder and run:
+
+```bash
+$ php -S localhost:<PORT>
+```
+
+where `<PORT>` is your favorite HTTP port.
+
+You can use this [request collection](./Insominia_2021-05-16.yaml) to run the queries in Insomnia.
+
+## Routes
 
 ### Users
 
