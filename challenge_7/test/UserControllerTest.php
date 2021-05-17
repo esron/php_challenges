@@ -11,6 +11,14 @@ use UsersAPI\UserModel;
 
 class UserControllerTest extends TestCase
 {
+    private $userRepositoryMock;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->userRepositoryMock = $this->createMock(UserRepository::class);
+    }
     public function testItReturnsUsers()
     {
         $returnUsers = [
@@ -28,11 +36,10 @@ class UserControllerTest extends TestCase
             ),
         ];
 
-        $userRepositoryMock = $this->createMock(UserRepository::class);
-        $userRepositoryMock->method('getUsers')
+        $this->userRepositoryMock->method('getUsers')
             ->willReturn($returnUsers);
 
-        $userController = new UserController($userRepositoryMock);
+        $userController = new UserController($this->userRepositoryMock);
 
         $this->assertEquals(json_encode([
             'data' => [
@@ -54,11 +61,10 @@ class UserControllerTest extends TestCase
 
     public function testItCanDeleteUsersByEmail()
     {
-        $userRepositoryMock = $this->createMock(UserRepository::class);
-        $userRepositoryMock->method('deleteUser')
+        $this->userRepositoryMock->method('deleteUser')
             ->willReturn(true);
 
-        $userController = new UserController($userRepositoryMock);
+        $userController = new UserController($this->userRepositoryMock);
 
         $this->assertEquals(json_encode([
             'data' => [
@@ -70,11 +76,10 @@ class UserControllerTest extends TestCase
     public function testItReturnsErrorWhenTheEmailIsNotFound()
     {
         $email = 'esron.dtamar@gmail.com';
-        $userRepositoryMock = $this->createMock(UserRepository::class);
-        $userRepositoryMock->method('deleteUser')
+        $this->userRepositoryMock->method('deleteUser')
             ->willReturn(false);
 
-        $userController = new UserController($userRepositoryMock);
+        $userController = new UserController($this->userRepositoryMock);
 
         $this->assertEquals(json_encode([
             'errors' => [
