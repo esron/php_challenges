@@ -12,7 +12,7 @@ $ php -S localhost:<PORT>
 
 where `<PORT>` is your favorite HTTP port.
 
-You can use this [request collection](./Insominia_2021-05-16.yaml) to run the queries in Insomnia.
+You can use this [request collection](./Insomnia_2021-05-16.yaml) to run the queries in Insomnia.
 
 ## Routes
 
