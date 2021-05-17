@@ -104,6 +104,6 @@ class UserControllerTest extends TestCase
 
         $this->assertEquals(json_encode([
             'data' => $user,
-        ]), $this->userController->createUser());
+        ]), $this->userController->createUser($user));
     }
 }
