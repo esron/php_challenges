@@ -19,7 +19,19 @@ if ($_SERVER['PATH_INFO'] === '/users') {
     switch ($_SERVER['REQUEST_METHOD']) {
         case 'GET':
             echo $userController->getUsers();
+            break;
+        case 'DELETE':
+            echo $userController->deleteUser($_REQUEST['email']);
+            break;
+        case 'POST':
+            $post = json_decode(file_get_contents('php://input'), true);
+            echo $userController->createUser($post);
+            break;
+        default:
+            return http_response_code(404);
     }
+
+    return;
 }
 
 return http_response_code(404);
