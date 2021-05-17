@@ -1,0 +1,33 @@
+{
+    "name": "esron/users-api",
+    "description": "A pure PHP Users REST API",
+    "type": "project",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "mikey179/vfsstream": "^1.6"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Esron",
+            "email": "esron.dtamar@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "UsersAPI\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit test"
+    }
+}
