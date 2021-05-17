@@ -43,4 +43,16 @@ class UserController
 
         return json_encode(['data' => $this->userRepository->saveUser($user)]);
     }
+
+    public function updateUser(string $email, array $post)
+    {
+        $newUser = new UserModel(
+            $post['firstName'],
+            $post['lastName'],
+            $post['email'],
+            $post['phone']
+        );
+
+        return json_encode(['data' => $this->userRepository->updateUser($email, $newUser)]);
+    }
 }
