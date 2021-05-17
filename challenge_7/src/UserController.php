@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace UsersAPI;
 
 use UsersAPI\UserRepository;
+use UsersAPI\UserModel;
 
 class UserController
 {
@@ -29,5 +30,17 @@ class UserController
         http_response_code(422);
 
         return json_encode(['errors' => ['email' => "User with email $email not found"]]);
+    }
+
+    public function createUser(array $post)
+    {
+        $user = new UserModel(
+            $post['firstName'],
+            $post['lastName'],
+            $post['email'],
+            $post['phone']
+        );
+
+        return json_encode(['data' => $this->userRepository->saveUser($user)]);
     }
 }
