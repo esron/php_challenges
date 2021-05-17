@@ -12,12 +12,15 @@ use UsersAPI\UserModel;
 class UserControllerTest extends TestCase
 {
     private $userRepositoryMock;
+    private $userController;
 
     public function setUp(): void
     {
         parent::setUp();
 
         $this->userRepositoryMock = $this->createMock(UserRepository::class);
+
+        $this->userController = new UserController($this->userRepositoryMock);
     }
     public function testItReturnsUsers()
     {
@@ -39,8 +42,6 @@ class UserControllerTest extends TestCase
         $this->userRepositoryMock->method('getUsers')
             ->willReturn($returnUsers);
 
-        $userController = new UserController($this->userRepositoryMock);
-
         $this->assertEquals(json_encode([
             'data' => [
                 [
@@ -56,7 +57,7 @@ class UserControllerTest extends TestCase
                     'phone' => '87900000000',
                 ],
             ]
-        ]), $userController->getUsers());
+        ]), $this->userController->getUsers());
     }
 
     public function testItCanDeleteUsersByEmail()
@@ -64,13 +65,11 @@ class UserControllerTest extends TestCase
         $this->userRepositoryMock->method('deleteUser')
             ->willReturn(true);
 
-        $userController = new UserController($this->userRepositoryMock);
-
         $this->assertEquals(json_encode([
             'data' => [
                 'message' => 'User deleted',
             ]
-        ]), $userController->deleteUser('esron.dtamar@gmail.com'));
+        ]), $this->userController->deleteUser('esron.dtamar@gmail.com'));
     }
 
     public function testItReturnsErrorWhenTheEmailIsNotFound()
@@ -79,12 +78,10 @@ class UserControllerTest extends TestCase
         $this->userRepositoryMock->method('deleteUser')
             ->willReturn(false);
 
-        $userController = new UserController($this->userRepositoryMock);
-
         $this->assertEquals(json_encode([
             'errors' => [
                 'email' => "User with email $email not found",
             ]
-        ]), $userController->deleteUser($email));
+        ]), $this->userController->deleteUser($email));
     }
 }
