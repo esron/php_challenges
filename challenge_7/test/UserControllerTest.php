@@ -106,4 +106,27 @@ class UserControllerTest extends TestCase
             'data' => $user,
         ]), $this->userController->createUser($user));
     }
+
+    public function testItCanUpdateAnUser()
+    {
+        $email = 'nicola.tesla@edson.com';
+        $newUser =  [
+            'firstName' => 'Nicola',
+            'lastName' => 'Tesla',
+            'email' => 'nicola.tesla@edson.com',
+            'phone' => '01912345678',
+        ];
+
+        $this->userRepositoryMock->method('updateUser')
+            ->willReturn(new UserModel(
+                $newUser['firstName'],
+                $newUser['lastName'],
+                $newUser['email'],
+                $newUser['phone']
+            ));
+
+        $this->assertEquals(json_encode([
+            'data' => $newUser,
+        ]), $this->userController->updateUser($email, $newUser));
+    }
 }
